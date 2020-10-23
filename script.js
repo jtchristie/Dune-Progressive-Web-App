@@ -36,19 +36,19 @@ $(document).ready(function() {
         
 function installApp(){
 //hide the install ui
-hidePrompt();
-console.log("Install App called");
-//show the install prompt 
-installEvt.prompt();
- installEvt.userChoice.then(function(result){
-if(result.outcome === 'accepted') console.log('App Installed');
-else
-console.log('App Not Installed');
-});
-installEvt = null;
+    hidePrompt();
+    console.log("Install App called");
+    //show the install prompt 
+    installEvt.prompt();
+    installEvt.userChoice.then(function(result){
+    if(result.outcome === 'accepted') console.log('App Installed');
+    else
+    console.log('App Not Installed');
+    });
+    installEvt = null;
 
-window.addEventListener('appinstalled', function(evt){ //The user installed the app
-    console.log('App Installed');
+    window.addEventListener('appinstalled', function(evt){ //The user installed the app
+        console.log('App Installed');
     });
 }
 //clear the saved event - it can't be used again anyway 
