@@ -20,6 +20,14 @@
     <title>Dune</title>
   </head>
   <body>
+    <section id="addToHomeScreen">
+      <h1>Install App</h1>
+      <img src="android-chrome-192x192.png" alt="NCC CS" />
+      Add our app to your home screen? <br/>
+      <a href="javascript:void(0)" onClick="hidePrompt()" >No, Thanks</a>
+      <button onClick="installApp()">Yes, Please!</button>
+      </section>
+      
   <section style="padding: 0;" class="section">
     <div class="container">
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -161,4 +169,5 @@
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="script.js"></script>
+  <script src="sw.js"></script>
   </html>
