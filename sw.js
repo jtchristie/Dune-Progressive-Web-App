@@ -9,6 +9,9 @@ var cachedFiles = [
     'manifest.json',
     'emperor.html',
     'favicon.ico',
+    'excerpt.html',
+    'manifest.json',
+    'children.html'
 ];
 
 self.addEventListener('install', function (evt) { 
