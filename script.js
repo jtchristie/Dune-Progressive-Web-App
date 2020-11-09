@@ -11,7 +11,10 @@ $(document).ready(function() {
     });
   });
 
+  var pwaSupport = false;
+
   if ('serviceWorker' in navigator){
+    pwaSupport = true;
     navigator.serviceWorker.register('/sw.js').then(function(result){ 
         console.log('Service Worker Registered'); 
         console.log("Scope: " + result.scope);
@@ -20,6 +23,24 @@ $(document).ready(function() {
         });
   } else {
       console.log('Service Worker Not Supported');
+  }
+
+  window.onload = function(){
+      if (pwaSupport){
+          var p = navigator.platform;
+          if (p==='iPhone' || p === 'iPad' || p ==='iPod'){
+              var lastShown = parseInt(localStorage.getItem('lastShown'));
+              var now = new Date().getTime();
+              if(isNaN(lastShown) || (lastShown + (1000 * 60 * 60 * 24 * 7)) <= now){
+                  document.getElementById('instructions').style.display = 'block';
+                  localStorage.setItem('lastShown', now);
+              }
+          }
+      }
+  }
+
+  function hideInstructions(){
+      document.getElementById('instructions').style.display = 'none';
   }
 
   var installEvt; window.addEventListener('beforeinstallprompt', function(evt){
@@ -52,3 +73,4 @@ function installApp(){
     });
 }
 //clear the saved event - it can't be used again anyway 
+

@@ -11,7 +11,11 @@ var cachedFiles = [
     'favicon.ico',
     'excerpt.html',
     'manifest.json',
-    'children.html'
+    'children.html',
+    '/img/aths.png',
+    '/img/share.png',
+    '/apple-touch-icon.png',
+    '/android-chrome-192x192.png'
 ];
 
 self.addEventListener('install', function (evt) { 

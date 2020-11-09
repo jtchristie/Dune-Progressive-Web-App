@@ -31,3 +31,40 @@
     color: white;
     
 }
+
+#instructions{
+    text-align: center;
+    background-color: #ec551e;
+    position:fixed;
+    bottom: 0px;
+    left: 10px;
+    right: 10px;
+    height: 40vh;
+    padding: 0px 10px 10px 10px;
+    display: none;
+}
+
+#instruction img{
+    height: 173px;
+    width: 100%;
+    object-fit: cover;
+    padding: 3vw;
+
+}
+
+#instructions button{
+    background-color: #c63d2a;
+    color: white;
+    border: 1px #2965f1 solid;
+}
+.buttonContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.instructionsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
