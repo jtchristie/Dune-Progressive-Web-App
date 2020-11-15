@@ -18,6 +18,25 @@ $(document).ready(function() {
     navigator.serviceWorker.register('/sw.js').then(function(result){ 
         console.log('Service Worker Registered'); 
         console.log("Scope: " + result.scope);
+        if ('Notification' in window){
+            console.log('Notifications Supported');
+            Notification.requestPermission(function(status){
+                console.log('Notification Permission: ', status);
+            });
+            var options = {
+                body: 'Welcome to Arrakis',
+                icon: 'android-chrome-192x192.png',
+                data: {
+                    timestamp: Date.now(),
+                    loc: 'index.html'
+                },
+                action: [
+                    {action: 'go', title: 'Go Now'}
+                ]
+            }
+        }
+        notify('Dune', options);
+
         }, function(error){
         console.log('Service Worker Registration Failed'); console.log(error.toString());
         });
@@ -73,4 +92,40 @@ function installApp(){
     });
 }
 //clear the saved event - it can't be used again anyway 
+
+function notify(title, options){
+    if(Notification.permission === 'granted'){
+        navigator.serviceWorker.ready.then(function(reg){
+            reg.showNotification(title, options);
+        });
+
+        }
+}
+
+function closeNotification(msg,evt){
+    console.log(msg, evt.notification.data);
+    evt.notification.close();
+}
+
+self.addEventListener('notificationclose', function(evt){
+    closeNotification('Notification Closed', evt);
+});
+
+self.addEventListener('notificationclick', function(evt){ 
+    if(evt.action !== 'close'){
+         evt.waitUntil(
+         self.clients.matchAll({type: 'window', includeUncontrolled:
+         true})
+    .then(function(allClients){
+         console.log(allClients);
+          for(var i=0; i< allClients.length; i++){
+             if(allClients[i].visibilityState === 'visible'){
+              console.log('Navigating'); allClients[i].navigate(evt.notification.data.loc); //No need to continue
+          break;
+              } 
+          }
+        }));
+    }
+    closeNotification('Notification Clicked', evt);
+ });
 

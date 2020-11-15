@@ -1,4 +1,4 @@
-var cacheName = 'CSv1';
+var cacheName = 'CSv4';
 
 var cachedFiles = [
     '/',
