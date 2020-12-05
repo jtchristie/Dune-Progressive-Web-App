@@ -32,6 +32,32 @@ self.addEventListener('install', function (evt) {
     );
 });
 
+
+self.addEventListener('push', function(evt){ 
+    console.log('Push Event Received');
+    var loc;
+    if (evt.data){
+        console.log('Data Received');
+        console.log(evt.data.text());
+        loc = evt.data.text();
+    } else {
+        loc = 'index.html';
+    }
+    var options = {
+        body: 'See What\'s New!',
+        icon: 'android-chrome-192x192.png', 
+        data: {
+             timestamp: Date.now(),
+             loc: 'index.html#info' 
+            },
+    actions: [
+         {action: 'go', title: 'Go Now'} ]
+    };
+    
+    evt.waitUntil(
+        self.registration.showNotification('NCC Computer Science', options) );
+    });
+    
 self.addEventListener('activate', function (evt) { 
     console.log('Service Worker Activated');
     evt.waitUntil(
